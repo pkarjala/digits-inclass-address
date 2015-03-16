@@ -11,6 +11,7 @@ import java.util.List;
 public class ContactFormData {
 
   private static final int DIGIT_LENGTH = 12;
+  private static final int ADDRESS_LENGTH = 24;
 
   /** The first name field. */
   public String firstName = "";
@@ -20,6 +21,11 @@ public class ContactFormData {
 
   /** The telephone number field. */
   public String telephone = "";
+
+  /** The address text field. */
+  public String address = "";
+
+
 
 
   /**
@@ -43,6 +49,14 @@ public class ContactFormData {
 
     if (telephone.length() != DIGIT_LENGTH) {
       errors.add(new ValidationError("telephone", "Digits must follow the format xxx-xxx-xxxx."));
+    }
+
+    if (address == null || address.length() == 0) {
+      errors.add(new ValidationError("address", "Address cannot be blank."));
+    }
+
+    if (address.length() <= ADDRESS_LENGTH) {
+      errors.add(new ValidationError("address", "Address must be at least 24 characters long"));
     }
 
     return errors.isEmpty() ? null : errors;
